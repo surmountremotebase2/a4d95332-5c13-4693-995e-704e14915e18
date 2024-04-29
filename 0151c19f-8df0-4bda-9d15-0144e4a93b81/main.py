@@ -6,19 +6,19 @@ class TradingStrategy(Strategy):
 
     @property
     def assets(self):
-        return ["QQQ"]
+        return ["MNQM2024"]
 
     @property
     def interval(self):
-        return "1hour"
+        return "5min"
 
     def run(self, data):
         d = data["ohlcv"]
         qqq_stake = 0
-        if len(d)>3 and "13:00" in d[-1]["QQQ"]["date"]:
-            v_shape = d[-2]["QQQ"]["close"]<d[-3]["QQQ"]["close"] and d[-1]["QQQ"]["close"]>d[-2]["QQQ"]["close"]
+        if len(d)>3 and "13:00" in d[-1]["MNQM2024"]["date"]:
+            v_shape = d[-2]["MNQM2024"]["close"]<d[-3]["MNQM2024"]["close"] and d[-1]["MNQM2024"]["close"]>d[-2]["MNQM2024"]["close"]
             log(str(v_shape))
             if v_shape:
                 qqq_stake = 1
 
-        return TargetAllocation({"QQQ": qqq_stake})
+        return TargetAllocation({"MNQM2024": qqq_stake})
